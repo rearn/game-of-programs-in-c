@@ -5,4 +5,4 @@ compiler:
   - gcc
 
 script:
-  - make test
+  - make test CC=${CC}

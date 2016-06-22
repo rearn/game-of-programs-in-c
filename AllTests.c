@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "CuTest.h"
 
@@ -6,7 +7,7 @@
 //CuSuite* CuStringGetSuite();
 CuSuite* StrUtilGetSuite();
 
-void RunAllTests(void)
+int RunAllTests(void)
 {
 	CuString *output = CuStringNew();
 	CuSuite* suite = CuSuiteNew();
@@ -19,9 +20,15 @@ void RunAllTests(void)
 	CuSuiteSummary(suite, output);
 	CuSuiteDetails(suite, output);
 	printf("%s\n", output->buffer);
+	if(strstr(output->buffer, "OK") != NULL) {
+		return 0;
+	}
+	else {
+		return 1;
+	}
 }
 
 int main(void)
 {
-	RunAllTests();
+	return RunAllTests();
 }
