@@ -11,7 +11,7 @@ RM       = rm
 
 all: $(EXENAME)
 
-run: all
+test: $(EXENAME)
 	./$(EXENAME)
 
 $(EXENAME): $(OBJGROUP)
