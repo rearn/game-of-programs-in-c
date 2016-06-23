@@ -19,6 +19,8 @@ clean:
 	$(RM) -f *.o
 	$(RM) -f $(EXENAME)
 
+a.o: a.h
+
 test.o: a.h test_support.h
 
 test_support_test.o: test_support.h

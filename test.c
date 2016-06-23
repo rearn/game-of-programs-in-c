@@ -69,6 +69,27 @@ void Test_my_sin0(CuTest *tc) {
 	CuAssertTrue(tc, double_equal(expected, actual));
 }
 
+void Test_my_napier(CuTest *tc) {
+	double actual = my_napier();
+	double expected = 2.7182818284;
+	CuAssertTrue(tc, double_equal(expected, actual));
+}
+
+void Test_my_lna(CuTest *tc) {
+	double input = 2;
+	double actual = my_lna(input);
+	double expected = 0.69314718055;
+	CuAssertTrue(tc, double_equal(expected, actual));
+}
+
+
+void Test_my_ln(CuTest *tc) {
+	double input = 3;
+	double actual = my_ln(input);
+	double expected = 1.09861228867;
+	CuAssertTrue(tc, double_equal(expected, actual));
+}
+
 CuSuite* SampleTestSuite() {
 	CuSuite* s = CuSuiteNew();
 	SAD(s, Test_int_add);
@@ -80,5 +101,8 @@ CuSuite* SampleTestSuite() {
 	SAD(s, Test_int_power);
 	SAD(s, Test_my_sin1);
 	SAD(s, Test_my_sin0);
+	SAD(s, Test_my_napier);
+	SAD(s, Test_my_lna);
+	SAD(s, Test_my_ln);
 	return s;
 }
