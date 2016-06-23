@@ -4,15 +4,16 @@
 #define SAD SUITE_ADD_TEST
 
 int double_equal(double a, double b) {
-	double e;
+	/*
+	a == b == 0 の判定はできない！！
+	*/
 	double e1 = a / 1000;
 	double e2 = b / 1000;
 	double d = a - b;
 	if(e1 < 0) e1 *= -1;
 	if(e2 < 0) e2 *= -1;
 	if(d < 0) d *= -1;
-	e = e1 < e2 ? e1 : e2;
-	return (d < e);
+	return (d < (e1 < e2 ? e1 : e2));
 }
 
 void Test_int_add(CuTest *tc) {
@@ -69,7 +70,6 @@ void Test_int_power(CuTest *tc) {
 
 void Test_my_sin1(CuTest *tc) {
 	double input = 1.57079632675;
-	//double input = 0;
 	double actual = my_sin(input);
 	double expected = 1;
 	CuAssertTrue(tc, double_equal(expected, actual));
@@ -77,10 +77,27 @@ void Test_my_sin1(CuTest *tc) {
 
 void Test_my_sin0(CuTest *tc) {
 	double input = 3.1415926535;
-	//double input = 0;
 	double actual = my_sin(input) + 1;
 	double expected = 1;
 	CuAssertTrue(tc, double_equal(expected, actual));
+}
+
+void Test_double_equal1(CuTest *tc) {
+	double a = 3.1415;
+	double b = 3.1414;
+	CuAssertTrue(tc, double_equal(a, b));
+}
+
+void Test_double_equal2(CuTest *tc) {
+	double a = 3.1415;
+	double b = 3.1490;
+	CuAssertTrue(tc, !double_equal(a, b));
+}
+
+void Test_double_equal3(CuTest *tc) {
+	double a = 0.0031415;
+	double b = 0.0031490;
+	CuAssertTrue(tc, !double_equal(a, b));
 }
 
 CuSuite* SampleTestSuite() {
@@ -94,5 +111,8 @@ CuSuite* SampleTestSuite() {
 	SAD(s, Test_int_power);
 	SAD(s, Test_my_sin1);
 	SAD(s, Test_my_sin0);
+	SAD(s, Test_double_equal1);
+	SAD(s, Test_double_equal2);
+	SAD(s, Test_double_equal3);
 	return s;
 }
