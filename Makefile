@@ -9,8 +9,6 @@ RM       = rm
 .c.o:
 	$(CC) $(CFLAGS) -c $<
 
-all: $(EXENAME)
-
 test: $(EXENAME)
 	./$(EXENAME)
 
@@ -20,3 +18,5 @@ $(EXENAME): $(OBJGROUP)
 clean:
 	$(RM) -f *.o
 	$(RM) -f $(EXENAME)
+
+test.o: a.c a.h
