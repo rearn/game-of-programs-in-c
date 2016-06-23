@@ -3,7 +3,7 @@ CC       = gcc
 CFLAG    = -g
 CFLAGS   = -Wall
 LDFLAG   = -lm
-OBJGROUP = AllTests.o CuTest.o test.o a.o
+OBJGROUP = AllTests.o CuTest.o test_support.o test_support_test.o test.o a.o
 RM       = rm
 
 .c.o:
@@ -19,4 +19,6 @@ clean:
 	$(RM) -f *.o
 	$(RM) -f $(EXENAME)
 
-test.o: a.c a.h
+test.o: a.h test_support.h
+
+test_support_test.o: test_support.h
